@@ -3,14 +3,13 @@ package com.sy.mongo.mongoDAO.pojos;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/9/21.
  */
-@Document(collection = "col")
-public class col {
+@Document(collection = "User")
+public class User {
 
     @Id
     private String _id;
@@ -70,7 +69,7 @@ public class col {
 
     @Override
     public String toString() {
-        return "col{" +
+        return "User{" +
                 "_id='" + _id + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
