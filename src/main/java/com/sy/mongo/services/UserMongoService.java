@@ -20,7 +20,9 @@ public class UserMongoService {
     public List<User> selectAll() {
         List<User> list = userDAO.mongoTemplate.findAll(User.class);
         L.w(list.toString());
-        userDAO.findAll();
+
+        List<User> list2 = userDAO.findAll();
+        L.w("2"+list2.toString());
         return list;
     }
 

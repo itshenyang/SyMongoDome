@@ -1,6 +1,7 @@
 package com.sy.mongo.mongoDAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.ReflectUtils;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -14,11 +15,22 @@ import java.util.List;
  * Created by Administrator on 2017/9/21.
  */
 @Repository
-public abstract class BaseDAO<T> {
-
-    private Class<T> BaseT;
+public   class BaseDAO<T> {
 
 
+
+    public Class<T> BaseT;
+    public BaseDAO(){
+        try {
+            if(BaseT==null) {
+                //获取泛型的Class对象
+                BaseT = (Class<T>) ((ParameterizedType)(this.getClass().getGenericSuperclass())).getActualTypeArguments()[0];
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
     @Autowired
     public MongoTemplate mongoTemplate;
@@ -37,34 +49,34 @@ public abstract class BaseDAO<T> {
     }
 
     public void deleteAll() {
-        mongoTemplate.dropCollection(BaseT.getClass());
+        mongoTemplate.dropCollection(BaseT);
     }
 
-    public void deletByQuery(T t, Query query) {
-        mongoTemplate.remove(query, t.getClass());
+    public void deletByQuery(Query query) {
+        mongoTemplate.remove(query, BaseT);
     }
 
     public void updateById(Long id, Update update) {
         Criteria criteria_id = Criteria.where("id").is(id);
         Query query = new Query();
         query.addCriteria(criteria_id);
-        mongoTemplate.updateFirst(query, update, BaseT.getClass());
+        mongoTemplate.updateFirst(query, update, BaseT);
     }
 
     public void updateByQuery(Query query, Update update) {
-        mongoTemplate.upsert(query, update, BaseT.getClass());
+        mongoTemplate.upsert(query, update, BaseT);
     }
 
     public List<T> findAll() {
-        return (List<T>) mongoTemplate.findAll(BaseT.getClass());
+        return   mongoTemplate.findAll(BaseT);
     }
 
     public T findById(Long id) {
-        return (T) mongoTemplate.findById(id, BaseT.getClass());
+        return (T) mongoTemplate.findById(id, BaseT);
     }
 
     public List<T> findQuery(Query query) {
-        return (List<T>) mongoTemplate.find(query, BaseT.getClass());
+        return (List<T>) mongoTemplate.find(query, BaseT);
     }
 
     public Query getQuery(Criteria... criterias) {

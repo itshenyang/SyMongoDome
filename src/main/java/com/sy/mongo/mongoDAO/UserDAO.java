@@ -39,10 +39,5 @@ public class UserDAO extends BaseDAO<User> implements BaseDAOInterface<User> {
 
 
 
-    @Test
-    public void Test(){
-        User user = new User();
-        user.setName("sdfsfsdffsddfs");
 
-    }
 }
