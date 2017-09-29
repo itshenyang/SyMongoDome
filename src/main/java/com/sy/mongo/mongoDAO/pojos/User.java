@@ -10,7 +10,6 @@ import java.util.List;
  */
 @Document(collection = "User")
 public class User {
-
     @Id
     private String _id;
     private String name;
