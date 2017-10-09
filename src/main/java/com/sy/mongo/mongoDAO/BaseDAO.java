@@ -57,9 +57,9 @@ public   class BaseDAO<T> {
 
     public void updateById(String id, Update update) {
         Criteria criteria_id = Criteria.where("id").is(id);
-        Query query = new Query();
+        Query query =  new Query();
         query.addCriteria(criteria_id);
-        mongoTemplate.updateFirst(query, update, BaseT);
+        mongoTemplate.upsert(query, update, BaseT);
     }
 
     public void updateByQuery(Query query, Update update) {

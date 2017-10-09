@@ -22,35 +22,67 @@ public class UserController {
 
     @RequestMapping(value = "findAll", method = RequestMethod.POST)
     @ResponseBody
-    public Object findAll(){
+    public Object findAll() {
         return userMongoService.findAll();
     }
 
 
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     @ResponseBody
-    public Object insert(@RequestBody User user){
+    public Object insert(@RequestBody User user) {
         return userMongoService.insert(user);
     }
 
 
     @RequestMapping(value = "insertAll", method = RequestMethod.POST)
     @ResponseBody
-    public Object insertAll(@RequestBody List<User> users){
+    public Object insertAll(@RequestBody List<User> users) {
         return userMongoService.insertAll(users);
     }
 
     @RequestMapping(value = "findById", method = RequestMethod.POST)
     @ResponseBody
-    public Object findById(@RequestBody User user){
+    public Object findById(@RequestBody User user) {
         return userMongoService.findById(user);
     }
 
 
     @RequestMapping(value = "findQueryScore", method = RequestMethod.POST)
     @ResponseBody
-    public Object findQueryScore(@RequestBody User user){
+    public Object findQueryScore(@RequestBody User user) {
         return userMongoService.findQueryScore(user);
     }
+
+    @RequestMapping(value = "updateById", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateById(@RequestBody User user) {
+        return userMongoService.updateById(user);
+    }
+
+    @RequestMapping(value = "updateByQueryAgeToScore", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateByQueryAgeToScore(@RequestBody User user) {
+        return userMongoService.updateByQueryAgeToScore(user);
+    }
+
+
+    @RequestMapping(value = "deleteById", method = RequestMethod.POST)
+    @ResponseBody
+    public Object deleteById(@RequestBody User user) {
+        return userMongoService.deleteById(user);
+    }
+
+    @RequestMapping(value = "deletByQueryScoreAndAge", method = RequestMethod.POST)
+    @ResponseBody
+    public Object deletByQueryScoreAndAge(@RequestBody User user) {
+        return userMongoService.deletByQueryScoreAndAge(user);
+    }
+
+    @RequestMapping(value = "deleteAll", method = RequestMethod.POST)
+    @ResponseBody
+    public Object deleteAll() {
+        return userMongoService.deleteAll();
+    }
+
 
 }

@@ -1,10 +1,10 @@
 package com.sy.mongo.mongoDAO;
 
 import com.sy.mongo.mongoDAO.pojos.User;
-import org.junit.Test;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 
 /**
  * Created by Administrator on 2017/9/29.
@@ -12,32 +12,37 @@ import org.springframework.util.StringUtils;
 @Repository
 public class UserDAO extends BaseDAO<User> implements BaseDAOInterface<User> {
 
+    @Override
+    public void updateById(String id, Update update) {
+        Criteria criteria_id = Criteria.where("id").is(id);
+        Query query =  new Query();
+        query.addCriteria(criteria_id);
+        mongoTemplate.findAndModify(query, update, User.class);
+    }
 
     @Override
-    public Update getUpdate(User user) {
+    public Update getUpdate(User user) {//Update.update("id",user.get_id()).set("name", user.getName()).set("age", user.getAge()).set("likes", user.getLikes()).set("score", user.getScore()).set("time", user.getTime())
         Update update = new Update();
 //        if (!StringUtils.isEmpty(user.get_id())) {
 //            update.set("id", user.get_id());
 //        }
-        if (!StringUtils.isEmpty(user.getName())) {
-            update.set("name", user.getName());
+        if (user.getName() != null) {
+            update = update.set("name", user.getName());
         }
-        if (!StringUtils.isEmpty(user.getAge())) {
-            update.set("age", user.getAge());
+        if (user.getAge() != null) {
+            update = update.set("age", user.getAge());
         }
-        if (!StringUtils.isEmpty(user.getLikes())) {
-            update.set("likes", user.getLikes());
+        if (user.getLikes() != null) {
+            update = update.set("likes", user.getLikes());
         }
-        if (!StringUtils.isEmpty(user.getScore())) {
-            update.set("score", user.getScore());
+        if (user.getScore() != null) {
+            update = update.set("score", user.getScore());
         }
-        if (!StringUtils.isEmpty(user.getTime())) {
-            update.set("time", user.getTime());
+        if (user.getTime() != null) {
+            update = update.set("time", user.getTime());
         }
         return update;
     }
-
-
 
 
 }
