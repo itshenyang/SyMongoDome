@@ -26,7 +26,6 @@ public class BaseMongoDAO<T> {
                 BaseT = (Class<T>) ((ParameterizedType) (this.getClass().getGenericSuperclass())).getActualTypeArguments()[0];
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
 
     }
@@ -56,7 +55,7 @@ public class BaseMongoDAO<T> {
     }
 
     public void updateById(String id, Update update) {
-        Criteria criteria_id = Criteria.where("id").is(id);
+        Criteria criteria_id = Criteria.where("_id").is(id);
         Query query = new Query();
         query.addCriteria(criteria_id);
         mongoTemplate.upsert(query, update, BaseT);

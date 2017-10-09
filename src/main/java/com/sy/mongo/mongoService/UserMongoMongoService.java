@@ -70,8 +70,7 @@ public class UserMongoMongoService extends BaseMongoService {
 
     public Boolean updateById(User user) {
         try {
-            //Update update = userDAO.getUpdate(user);
-            Update update = Update.update("id", user.get_id()).set("name", user.getName());
+            Update update = userDAO.getUpdate(user);
             userDAO.updateById(user.get_id(), update);
             return true;
         } catch (Exception e) {
