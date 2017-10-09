@@ -1,6 +1,6 @@
 package com.sy.mongo.mongoService;
 
-import com.sy.mongo.mongoDAO.UserDAO;
+import com.sy.mongo.mongoDAO.UserMongoMongoDAO;
 import com.sy.mongo.mongoDAO.pojos.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class UserMongoMongoService extends BaseMongoService {
     @Autowired
-    UserDAO userDAO;
+    UserMongoMongoDAO userDAO;
 
     public Boolean insert(User user) {
         try {
@@ -71,7 +71,7 @@ public class UserMongoMongoService extends BaseMongoService {
     public Boolean updateById(User user) {
         try {
             //Update update = userDAO.getUpdate(user);
-            Update update = Update.update("id",user.get_id()).set("name", user.getName());
+            Update update = Update.update("id", user.get_id()).set("name", user.getName());
             userDAO.updateById(user.get_id(), update);
             return true;
         } catch (Exception e) {
@@ -120,7 +120,7 @@ public class UserMongoMongoService extends BaseMongoService {
         try {
             Criteria criteria = Criteria.where("score").is(user.getScore());
             List<User> list = userDAO.findQuery(userDAO.getQuery(criteria));
-            return  list;
+            return list;
         } catch (Exception e) {
 
         }

@@ -7,5 +7,5 @@
     <typeAliases>
         <package name="com.keruis.cilent.dao.pojos"/>
     </typeAliases>
- 
+
 </configuration>

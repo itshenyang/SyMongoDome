@@ -12,7 +12,7 @@ public class Test {
     public static void setAllComponentsName(Object f) {
 // 获取f对象对应类中的所有属性域
         Field[] fields = f.getClass().getDeclaredFields();
-        for(int i = 0 , len = fields.length; i < len; i++) {
+        for (int i = 0, len = fields.length; i < len; i++) {
 // 对于每个属性，获取属性名
             String varName = fields[i].getName();
             try {
@@ -33,9 +33,7 @@ public class Test {
         }
     }
 
-    public static void main(String[] args)
-    {
-
+    public static void main(String[] args) {
 
 
 //        User user = new User();
@@ -47,7 +45,7 @@ public class Test {
     }
 
 
-    public     User testuer(String key,String value){
+    public User testuer(String key, String value) {
         User use = new User();
         return use;
     }

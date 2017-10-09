@@ -10,18 +10,12 @@ import org.springframework.stereotype.Repository;
  * Created by Administrator on 2017/9/29.
  */
 @Repository
-public class UserDAO extends BaseDAO<User> implements BaseDAOInterface<User> {
+public class UserMongoMongoDAO extends BaseMongoDAO<User> implements BaseMongoDAOInterface<User> {
+
+
 
     @Override
-    public void updateById(String id, Update update) {
-        Criteria criteria_id = Criteria.where("id").is(id);
-        Query query =  new Query();
-        query.addCriteria(criteria_id);
-        mongoTemplate.findAndModify(query, update, User.class);
-    }
-
-    @Override
-    public Update getUpdate(User user) {//Update.update("id",user.get_id()).set("name", user.getName()).set("age", user.getAge()).set("likes", user.getLikes()).set("score", user.getScore()).set("time", user.getTime())
+    public Update getUpdate(User user) {
         Update update = new Update();
 //        if (!StringUtils.isEmpty(user.get_id())) {
 //            update.set("id", user.get_id());

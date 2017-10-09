@@ -14,18 +14,18 @@ import java.util.List;
  * Created by Administrator on 2017/9/21.
  */
 @Repository
-public   class BaseDAO<T> {
-
+public class BaseMongoDAO<T> {
 
 
     public Class<T> BaseT;
-    public BaseDAO(){
+
+    public BaseMongoDAO() {
         try {
-            if(BaseT==null) {
+            if (BaseT == null) {
                 //获取泛型的Class对象
-                BaseT = (Class<T>) ((ParameterizedType)(this.getClass().getGenericSuperclass())).getActualTypeArguments()[0];
+                BaseT = (Class<T>) ((ParameterizedType) (this.getClass().getGenericSuperclass())).getActualTypeArguments()[0];
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -57,7 +57,7 @@ public   class BaseDAO<T> {
 
     public void updateById(String id, Update update) {
         Criteria criteria_id = Criteria.where("id").is(id);
-        Query query =  new Query();
+        Query query = new Query();
         query.addCriteria(criteria_id);
         mongoTemplate.upsert(query, update, BaseT);
     }
@@ -67,7 +67,7 @@ public   class BaseDAO<T> {
     }
 
     public List<T> findAll() {
-        return   mongoTemplate.findAll(BaseT);
+        return mongoTemplate.findAll(BaseT);
     }
 
     public T findById(String id) {
