@@ -1,7 +1,6 @@
 package com.sy.mongo.mongoDAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.ReflectUtils;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -56,7 +55,7 @@ public   class BaseDAO<T> {
         mongoTemplate.remove(query, BaseT);
     }
 
-    public void updateById(Long id, Update update) {
+    public void updateById(String id, Update update) {
         Criteria criteria_id = Criteria.where("id").is(id);
         Query query = new Query();
         query.addCriteria(criteria_id);
@@ -71,7 +70,7 @@ public   class BaseDAO<T> {
         return   mongoTemplate.findAll(BaseT);
     }
 
-    public T findById(Long id) {
+    public T findById(String id) {
         return (T) mongoTemplate.findById(id, BaseT);
     }
 

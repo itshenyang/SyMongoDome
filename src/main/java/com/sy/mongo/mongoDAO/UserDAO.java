@@ -16,9 +16,9 @@ public class UserDAO extends BaseDAO<User> implements BaseDAOInterface<User> {
     @Override
     public Update getUpdate(User user) {
         Update update = new Update();
-        if (!StringUtils.isEmpty(user.get_id())) {
-            update.set("id", user.get_id());
-        }
+//        if (!StringUtils.isEmpty(user.get_id())) {
+//            update.set("id", user.get_id());
+//        }
         if (!StringUtils.isEmpty(user.getName())) {
             update.set("name", user.getName());
         }
